@@ -7,12 +7,17 @@ public class ContaPoupanca extends Conta {
     }
 
     @Override
-    public boolean sacar(double valor){
-        if (valor > 0 && saldo >= valor) {
-            saldo -= valor;
-            return true;
+    public ResultadoSaque sacar(double valor){
+        if(valor <= 0){
+            return ResultadoSaque.VALOR_INVALIDO;
         }
-        return false;
+
+        if (saldo < valor){
+            return ResultadoSaque.SALDO_INSUFICIENTE;
+        }
+
+        saldo -= valor;
+        return ResultadoSaque.SUCESSO;
     }
 
     @Override

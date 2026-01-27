@@ -32,5 +32,5 @@ public abstract class Conta {
         }
     }
 
-    public abstract boolean sacar(double valor);
+    public abstract ResultadoSaque sacar(double valor);
 }

@@ -1,5 +1,7 @@
 package br.com.diogo.banco.model;
 
+import javax.xml.transform.Result;
+
 public class ContaCorrente extends Conta {
 
     private static final double TAXA_SAQUE = 1.5;
@@ -9,20 +11,20 @@ public class ContaCorrente extends Conta {
     }
 
     @Override
-    public boolean sacar(double valor) {
+    public ResultadoSaque sacar(double valor) {
 
         if (valor <= 0) {
-            return false;
+            return ResultadoSaque.VALOR_INVALIDO;
         }
 
         double valorComTaxa = valor + TAXA_SAQUE;
 
         if (saldo < valorComTaxa) {
-            return false;
+            return ResultadoSaque.SALDO_INSUFICIENTE;
         }
 
         saldo -= valorComTaxa;
-        return true;
+        return ResultadoSaque.SUCESSO;
     }
 
     @Override
