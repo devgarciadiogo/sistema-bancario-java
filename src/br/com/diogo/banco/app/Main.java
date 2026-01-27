@@ -9,7 +9,7 @@ public class Main {
         BancoService banco = new BancoService();
 
         // Criando cliente
-        Cliente cliente = new Cliente("Diogo", "182.923.237.16");
+        Cliente cliente = new Cliente("Diogo", "123.123.123-45");
 
         // Criando contas
         ContaCorrente cc = new ContaCorrente(cliente);

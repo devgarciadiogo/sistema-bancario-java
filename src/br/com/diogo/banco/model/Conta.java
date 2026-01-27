@@ -1,11 +1,11 @@
 package br.com.diogo.banco.model;
 
-public class Conta {
+public abstract class Conta {
 
     private static int SEQUENCIAL = 1;
 
     private int numero;
-    private double saldo;
+    protected double saldo;
     private Cliente cliente;
 
     public Conta(Cliente cliente) {
@@ -32,12 +32,5 @@ public class Conta {
         }
     }
 
-    public boolean sacar(double valor) {
-        if (valor > 0 && saldo >= valor) {
-            saldo -= valor;
-            return true;
-        }
-        return false;
-    }
-
+    public abstract boolean sacar(double valor);
 }
