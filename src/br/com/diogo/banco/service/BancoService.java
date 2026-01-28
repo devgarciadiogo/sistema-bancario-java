@@ -1,6 +1,7 @@
 package br.com.diogo.banco.service;
 
 import br.com.diogo.banco.model.Conta;
+import br.com.diogo.banco.model.ResultadoSaque;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,30 +38,31 @@ public class BancoService {
 
     }
 
-    public boolean sacar(int numeroConta, double valor){
+    public ResultadoSaque sacar(int numeroConta, double valor){
         Conta conta = buscarContaPorNumero(numeroConta);
 
         if(conta == null){
-            return false;
+            return ResultadoSaque.CONTA_INEXISTENTE;
         }
 
         return conta.sacar(valor);
     }
 
-    public boolean transferir(int origem, int destino, double valor) {
+    public ResultadoSaque transferir(int origem, int destino, double valor) {
         Conta contaOrigem = buscarContaPorNumero(origem);
         Conta contaDestino = buscarContaPorNumero(destino);
 
         if (contaOrigem == null || contaDestino == null) {
-            return false;
+            return ResultadoSaque.CONTA_INEXISTENTE;
         }
 
-        if (contaOrigem.sacar(valor)) {
+        ResultadoSaque resultado = contaOrigem.sacar(valor);
+
+        if(resultado == ResultadoSaque.SUCESSO){
             contaDestino.depositar(valor);
-            return true;
         }
 
-        return false;
+        return resultado;
     }
 
 }
