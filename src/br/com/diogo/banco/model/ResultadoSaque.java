@@ -4,5 +4,5 @@ public enum ResultadoSaque {
     SUCESSO,
     SALDO_INSUFICIENTE,
     VALOR_INVALIDO,
-    CONTA_INEXISTENTE
+    CONTA_NAO_ENCONTRADA
 }

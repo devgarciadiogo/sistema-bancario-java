@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BancoService {
+
     private List<Conta> contas = new ArrayList<>();
 
     public void adicionarConta(Conta conta) {
@@ -25,24 +26,19 @@ public class BancoService {
     public boolean depositar(int numeroConta, double valor) {
         Conta conta = buscarContaPorNumero(numeroConta);
 
-        if (conta == null) {
-            return false;
-        }
-
-        if (valor <= 0){
+        if (conta == null || valor <= 0) {
             return false;
         }
 
         conta.depositar(valor);
         return true;
-
     }
 
-    public ResultadoSaque sacar(int numeroConta, double valor){
+    public ResultadoSaque sacar(int numeroConta, double valor) {
         Conta conta = buscarContaPorNumero(numeroConta);
 
-        if(conta == null){
-            return ResultadoSaque.CONTA_INEXISTENTE;
+        if (conta == null) {
+            return ResultadoSaque.CONTA_NAO_ENCONTRADA;
         }
 
         return conta.sacar(valor);
@@ -53,16 +49,19 @@ public class BancoService {
         Conta contaDestino = buscarContaPorNumero(destino);
 
         if (contaOrigem == null || contaDestino == null) {
-            return ResultadoSaque.CONTA_INEXISTENTE;
+            return ResultadoSaque.CONTA_NAO_ENCONTRADA;
         }
 
         ResultadoSaque resultado = contaOrigem.sacar(valor);
 
-        if(resultado == ResultadoSaque.SUCESSO){
+        if (resultado == ResultadoSaque.SUCESSO) {
             contaDestino.depositar(valor);
         }
 
         return resultado;
     }
 
+    public List<Conta> listarContas() {
+        return contas;
+    }
 }

@@ -1,6 +1,5 @@
 package br.com.diogo.banco.model;
 
-import javax.xml.transform.Result;
 
 public class ContaCorrente extends Conta {
 

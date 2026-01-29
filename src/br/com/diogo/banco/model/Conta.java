@@ -4,9 +4,9 @@ public abstract class Conta {
 
     private static int SEQUENCIAL = 1;
 
-    private int numero;
+    protected int numero;
     protected double saldo;
-    private Cliente cliente;
+    protected Cliente cliente;
 
     public Conta(Cliente cliente) {
         this.numero = SEQUENCIAL++;
