@@ -11,6 +11,10 @@ public class BancoService {
     private List<Conta> contas = new ArrayList<>();
 
     public void adicionarConta(Conta conta) {
+        if (conta == null) {
+            throw new IllegalArgumentException("Conta inválida");
+        }
+
         contas.add(conta);
     }
 
@@ -62,6 +66,6 @@ public class BancoService {
     }
 
     public List<Conta> listarContas() {
-        return contas;
+        return new ArrayList<>(contas);
     }
 }

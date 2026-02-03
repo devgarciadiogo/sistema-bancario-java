@@ -4,11 +4,15 @@ public abstract class Conta {
 
     private static int SEQUENCIAL = 1;
 
-    protected int numero;
+    protected final int numero;
     protected double saldo;
-    protected Cliente cliente;
+    protected final Cliente cliente;
 
     public Conta(Cliente cliente) {
+        if (cliente == null) {
+            throw new IllegalArgumentException("Cliente não pode ser nulo");
+        }
+
         this.numero = SEQUENCIAL++;
         this.cliente = cliente;
         this.saldo = 0.0;
@@ -27,9 +31,11 @@ public abstract class Conta {
     }
 
     public void depositar(double valor) {
-        if (valor > 0) {
-            saldo += valor;
+        if (valor <= 0) {
+            throw new IllegalArgumentException("Valor de depósito inválido");
         }
+
+        saldo += valor;
     }
 
     public abstract ResultadoSaque sacar(double valor);
